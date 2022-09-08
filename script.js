@@ -3,12 +3,12 @@ var data = [
     {
         "qs": "Inside which HTML element do we put the JavaScript?",
         "options": [
-            "<js>",
-            "<javascript>",
-            "<scripting>",
-            "<script>",
+            "js",
+            "javascript",
+            "scripting",
+            "script",
         ],
-        "answerID": 3
+        "answerID": 2
     },
     {
         "qs": "Where is the correct place to insert a JavaScript?",
@@ -30,7 +30,7 @@ var data = [
     },
     {
         "qs": "How to write an IF statement in JavaScript?",
-        "option": [
+        "options": [
             "if i = 5 then",
             "if i = 5",
             "if (i == 5)",
@@ -39,3 +39,46 @@ var data = [
         "answerID": 2
     },
 ]
+
+// defining variable
+let questionNo = 0;
+let score = 0;
+let startButton = document.getElementById("start");
+let questionsDiv = document.getElementById("questions");
+var itemIndex = 0;
+// hide item when play
+
+// start btn on click 
+start.addEventListener("click", function() {
+    hideItem(startButton);
+
+    var question = data[0];
+    questionsDiv.innerHTML = '<h2 id="questionTitle">' + question.qs + '</h2>';
+    //questionsDiv.innerHTML = `<h2 id="questionTitle">${question.qs}</h2>`;
+
+    for(let i = 0; i < question.options.length; i++){        
+        questionsDiv.innerHTML += `<input type="radio" id="option${i}" name="fav_language" value="${question.options[i]}"><label for="html">${question.options[i]}</label><br>`   
+    }  
+
+    show(questionsDiv);
+    for(let i = 0; i < question.options.length; i++){  
+        let optionRadioButton = document.getElementById("option" + i);
+        optionRadioButton.addEventListener("click", function(){
+            if(question.answerID == i) alert("Dung cmnr");
+            else alert("Sai cmr");
+    
+        });
+    }
+
+   
+   
+});
+
+
+function hideItem(element) {
+    element.style.display = "none";
+}
+
+function show(element) {
+    element.style.display = "block";
+}
