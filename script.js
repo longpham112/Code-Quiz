@@ -46,34 +46,42 @@ let score = 0;
 let startButton = document.getElementById("start");
 let questionsDiv = document.getElementById("questions");
 var itemIndex = 0;
-// hide item when play
+var list = document.getElementById(".listItem")
 
 // start btn on click 
-start.addEventListener("click", function() {
+start.addEventListener("click", function () {
     hideItem(startButton);
 
     var question = data[0];
     questionsDiv.innerHTML = '<h2 id="questionTitle">' + question.qs + '</h2>';
     //questionsDiv.innerHTML = `<h2 id="questionTitle">${question.qs}</h2>`;
 
-    for(let i = 0; i < question.options.length; i++){        
-        questionsDiv.innerHTML += `<input type="radio" id="option${i}" name="fav_language" value="${question.options[i]}"><label for="html">${question.options[i]}</label><br>`   
-    }  
-
-    show(questionsDiv);
-    for(let i = 0; i < question.options.length; i++){  
-        let optionRadioButton = document.getElementById("option" + i);
-        optionRadioButton.addEventListener("click", function(){
-            if(question.answerID == i) alert("Dung cmnr");
-            else alert("Sai cmr");
-    
-        });
+    for (let i = 0; i < question.options.length; i++) {
+        questionsDiv.innerHTML += `<input type="radio" id="option${i}" name="fav_language" value="${question.options[i]}"><label for="html">${question.options[i]}</label><br>`
     }
 
-   
-   
+    show(questionsDiv);
+    for (let i = 0; i < question.options.length; i++) {
+        let optionRadioButton = document.getElementById("option" + i);
+        optionRadioButton.addEventListener("click", function () {
+            if (question.answerID == i) alert("Dung ");
+            else alert("Sai cmr");
+        });
+    }
+    var secondLeft = 60;
+    var timeEL = document.querySelector(".timer")
+    var setTime = function () {
+        var timerInterval = setInterval(function () {
+            secondLeft--;
+            timeEL.textContent = secondLeft;
+            if (secondLeft === 0) {
+                clearInterval(timerInterval)
+                show(startButton)
+            }
+        }, 1000)
+    }
+    setTime();
 });
-
 
 function hideItem(element) {
     element.style.display = "none";
@@ -82,3 +90,4 @@ function hideItem(element) {
 function show(element) {
     element.style.display = "block";
 }
+
